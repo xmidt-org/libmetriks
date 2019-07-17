@@ -12,17 +12,17 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-set(PROJ_WRPC parodus2metrics)
+set(PROJ_METRIKS metriks)
 
 file(GLOB HEADERS metrics.h)
 set(SOURCES metrics.c trie/trie.c)
 
-add_library(${PROJ_WRPC} STATIC ${HEADERS} ${SOURCES})
-add_library(${PROJ_WRPC}.shared SHARED ${HEADERS} ${SOURCES})
-set_target_properties(${PROJ_WRPC}.shared PROPERTIES OUTPUT_NAME ${PROJ_WRPC})
-set_property(TARGET ${PROJ_WRPC} PROPERTY C_STANDARD 99)
-set_property(TARGET ${PROJ_WRPC}.shared PROPERTY C_STANDARD 99)
+add_library(${PROJ_METRIKS} STATIC ${HEADERS} ${SOURCES})
+add_library(${PROJ_METRIKS}.shared SHARED ${HEADERS} ${SOURCES})
+set_target_properties(${PROJ_METRIKS}.shared PROPERTIES OUTPUT_NAME ${PROJ_METRIKS})
+set_property(TARGET ${PROJ_METRIKS} PROPERTY C_STANDARD 99)
+set_property(TARGET ${PROJ_METRIKS}.shared PROPERTY C_STANDARD 99)
 
-install (TARGETS ${PROJ_WRPC} DESTINATION lib${LIB_SUFFIX})
-install (TARGETS ${PROJ_WRPC}.shared DESTINATION lib${LIB_SUFFIX})
-install (FILES metrics.h DESTINATION include/${PROJ_WRPC})
+install (TARGETS ${PROJ_METRIKS} DESTINATION lib${LIB_SUFFIX})
+install (TARGETS ${PROJ_METRIKS}.shared DESTINATION lib${LIB_SUFFIX})
+install (FILES metrics.h DESTINATION include/${PROJ_METRIKS})

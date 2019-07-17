@@ -1,0 +1,2 @@
+Copied directly from here:
+https://github.com/skeeto/trie

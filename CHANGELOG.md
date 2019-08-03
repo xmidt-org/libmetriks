@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.0.0] - [0.0.0]
 ### Added
+- Added gauge and counter implementation and a really simple test.
 - Initial creation
 
 [Unreleased]: https://github.com/xmidt-org/libmetriks/compare/1.0.0...HEAD

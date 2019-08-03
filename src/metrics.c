@@ -113,6 +113,7 @@ metrics_t metrics_init( const struct metrics_config *c )
     m->keep_running = 1;
     rv = pthread_create( &m->report_thread, NULL, __report_loop, m );
     if( 0 != rv ) {
+        metrics_shutdown( m );
         m = NULL;
     }
 

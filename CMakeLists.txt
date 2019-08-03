@@ -48,21 +48,6 @@ include_directories (SYSTEM /usr/include)
 #-------------------------------------------------------------------------------
 find_package (Threads)
 
-if (NOT BUILD_YOCTO)
-
-# cimplog external dependency
-#-------------------------------------------------------------------------------
-ExternalProject_Add(cimplog
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/_prefix/cimplog
-    GIT_REPOSITORY https://github.com/Comcast/cimplog.git
-    GIT_TAG "master"
-    CMAKE_ARGS += -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}
-)
-add_library(libcimplog STATIC SHARED IMPORTED)
-add_dependencies(libcimplog cimplog)
-
-endif ()
-
 enable_testing()
 
 link_directories ( ${LIBRARY_DIR} ${COMMON_LIBRARY_DIR} ${LIBRARY_DIR64} )

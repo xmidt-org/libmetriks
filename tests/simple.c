@@ -36,27 +36,26 @@ void test_counter( void )
     m = metrics_init( &c );
 
     metrics_counter_inc( m, "webpa_process_restart", 1 );
-    metrics_counter_inc( m, "webpa_messages_sent", 1 );
     metrics_counter_inc( m, "webpa_process_restart", 1 );
     metrics_counter_inc( m, "webpa_process_restart", 1 );
-    metrics_counter_inc( m, "webpa_messages_sent", 1 );
-    metrics_counter_inc_labels( m, "webpa_messages_sent", 1, 1, "dest", "wes" );
-    metrics_counter_inc_labels( m, "webpa_messages_sent", 1, 1, "dest", "fred" );
+    metrics_counter_inc_labels( m, "trip_counter", 1, 1, "dest", "wes" );
+    metrics_counter_inc_labels( m, "trip_counter", 1, 1, "dest", "fred" );
     metrics_counter_inc_labels( m, "webpa_messages_sent", 1, 2, "method", "post", "status", "200" );
     metrics_counter_inc_labels( m, "webpa_messages_sent", 1, 2, "method", "post", "status", "400" );
     metrics_counter_inc_labels( m, "webpa_messages_sent", 1, 2, "method", "get", "status", "403" );
     metrics_counter_inc_labels( m, "webpa_messages_sent", 1, 2, "method", "GET", "status", "403" );
     metrics_gauge_set_labels( m, "webpa_gauge", -1023, 1, "dest", "fred" );
-    metrics_gauge_set( m, "webpa_cpu", -1023 );
+    metrics_gauge_set( m, "webpa_cpu", 1023 );
     metrics_gauge_set_labels( m, "cat_dog", -1023, 1, "dest", "fred" );
     metrics_gauge_set_labels( m, "webpa_gauge_3", -1023, 1, "dest", "fred" );
     metrics_gauge_set_labels( m, "webpa_gauge_alfa", -1023, 1, "dest", "fred" );
     metrics_gauge_set_labels( m, "cat_door", -1023, 1, "dest", "fred" );
     metrics_gauge_set_labels( m, "simon", -1023, 1, "dest", "fred" );
-    metrics_gauge_set_labels( m, "wtf", -1023, 1, "dest", "fred" );
     metrics_gauge_set_labels( m, "webpa_gauge", 1023, 1, "dest", "fred" );
-    //metrics_report( m );
-    sleep( 15 );
+    sleep( 5 );
+    metrics_shutdown( m );
+
+    CU_ASSERT( 1 );
 }
 
 void add_suites( CU_pSuite *suite )

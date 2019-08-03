@@ -203,18 +203,4 @@ void metrics_gauge_set_labels( metrics_t m, const char *name, int64_t value,
 /*----------------------------------------------------------------------------*/
 /* TBD */
 
-/*----------------------------------------------------------------------------*/
-/*                              Event Functions                               */
-/*----------------------------------------------------------------------------*/
-/* TBD */
-
-/**
- *  This function records the occurrence of a particular event at a particular time.
- *
- *  @param m     - The metric object to reference.
- *  @param name  - The event name to record.
- *  @param event - The unique event id to log
- */
-void event_record( metrics_t m, const char *name, uint64_t event );
-
 #endif

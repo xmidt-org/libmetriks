@@ -81,6 +81,7 @@ struct trie_visitor {
 /*----------------------------------------------------------------------------*/
 static void* __report_loop( void* );
 static int __visitor( const char*, void*, void* );
+static int __destroyer( const char*, void*, void* );
 
 void __generate_report( metrics_t, char**, size_t* );
 static void __unsafe_gauge_set( __metrics_t*, const char*, int64_t );
@@ -126,7 +127,9 @@ void metrics_shutdown( metrics_t __m )
     if( NULL != m ) {
         m->keep_running = 0;
         pthread_join( m->report_thread, NULL );
+        trie_visit( m->counters, "", __destroyer, NULL );
         trie_free( m->counters );
+        trie_visit( m->gauges, "", __destroyer, NULL );
         trie_free( m->gauges );
         free( m->label__report_buffer );
 
@@ -294,13 +297,6 @@ void metrics_gauge_set_labels( metrics_t __m, const char *name, int64_t value,
     free( full );
 }
 
-/* See metrics.h for details. */
-void metrics_event_record( metrics_t __m, const uint64_t event )
-{
-    __metrics_t *m = (__metrics_t*) __m;
-    (void) m; (void) event;
-}
-
 /*----------------------------------------------------------------------------*/
 /*                             Internal functions                             */
 /*----------------------------------------------------------------------------*/
@@ -389,6 +385,7 @@ static void* __report_loop( void *__m )
         len = m->c->initial_report_size;
     }
     buf = (char*) malloc( len * sizeof(char) );
+    memset( buf, 0, len );
 
     /* Record the report buffer size as metrics */
     metrics_gauge_set_labels( (metrics_t) m, "metrics_report_buffer",
@@ -423,9 +420,6 @@ void __generate_report( metrics_t __m, char **buf, size_t *len )
 {
     struct trie_visitor d;
     __metrics_t *m = (__metrics_t*) __m;
-
-    (void) buf;
-    (void) len;
 
     __unsafe_counter_inc( (metrics_t) m, "metrics_report_count", 1 );
 
@@ -487,4 +481,13 @@ static int __visitor( const char *key, void *data, void *arg )
     return 0;
 }
 
+static int __destroyer( const char *key, void *data, void *arg )
+{
+    (void) key;
+    (void) arg;
 
+    if( NULL != data ) {
+        free( data );
+    }
+    return 0;
+}

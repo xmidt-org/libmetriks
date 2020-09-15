@@ -6,6 +6,7 @@
 [![Coverity](https://img.shields.io/coverity/scan/16677.svg)](https://scan.coverity.com/projects/libmetriks)
 [![Apache V2 License](http://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/xmidt-org/libmetriks/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/xmidt-org/libmetriks.svg)](CHANGELOG.md)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=xmidt-org_libmetriks&metric=alert_status)](https://sonarcloud.io/dashboard?id=xmidt-org_libmetriks)
 
 
 A simple C based metrics gathering and reporting tool that stores the metrics in
